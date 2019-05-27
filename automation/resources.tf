@@ -2,25 +2,21 @@ resource "google_container_cluster" "locust" {
   name = "load-testing-gke"
   location = "us-west1-a"
   initial_node_count = "3"
-  node_count = 1
   
   addons_config {
-      horizontal_pod_autoscaling {
-          disabled = false
-      }
+    horizontal_pod_autoscaling {
+        disabled = false
+    }
 
-      http_load_balancing {
-          disabled = false
-      }
+    http_load_balancing {
+        disabled = false
+    }
+
   }
 
   node_locations = [
       "us-west1-b"
   ]
-
-  cluster_autoscaling {
-      enabled = true
-  }
 
 # empty username and password disables basic auth
   master_auth {
@@ -43,4 +39,9 @@ resource "google_container_cluster" "locust" {
 
     tags = ["load-testing"]
   }
+}
+
+
+data "google_container_registry_repository" "kubernetes" {
+    region = "us"
 }
