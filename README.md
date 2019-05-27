@@ -9,3 +9,8 @@ The project has been based on this tutorial:
 https://github.com/GoogleCloudPlatform/distributed-load-testing-using-kubernetes
 
 
+### Running it 
+
+```
+terraform init
+```

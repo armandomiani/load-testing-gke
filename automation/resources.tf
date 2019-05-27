@@ -1,11 +1,32 @@
 resource "google_container_cluster" "locust" {
   name = "load-testing-gke"
-  zone = "us-west1-a"
-  initial_node_count = "1"
+  location = "us-west1-a"
+  initial_node_count = "3"
+  node_count = 1
+  
+  addons_config {
+      horizontal_pod_autoscaling {
+          disabled = false
+      }
 
-  additional_zones = [
-    "us-west1-b"
+      http_load_balancing {
+          disabled = false
+      }
+  }
+
+  node_locations = [
+      "us-west1-b"
   ]
+
+  cluster_autoscaling {
+      enabled = true
+  }
+
+# empty username and password disables basic auth
+  master_auth {
+      username = "",
+      password = ""
+  }
 
   node_config {
     oauth_scopes = [
@@ -13,6 +34,7 @@ resource "google_container_cluster" "locust" {
       "https://www.googleapis.com/auth/devstorage.read_only",
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
+      "https://www.googleapis.com/auth/cloud-platform"
     ]
 
     labels {

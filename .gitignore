@@ -1,1 +1,9 @@
+# compiled files
+*.tfstate
+*.tfstate.backup
+
+# plugins directory
+.terraform/
+
+# auth keys
 keys/
