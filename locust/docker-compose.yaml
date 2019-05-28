@@ -1,11 +1,15 @@
-version: '2'
+version: '3'
 
 services:
   master:
     build: .
     environment:
       - TARGET_HOST=http://www.kenlo.com.br
+      - CLIENTS=10
+      - HATCH_RATE=1
+      - RUN_TIME=1m
       - LOCUST_MODE=master
+      - SLAVES_COUNT=2
     ports:
       - 8089:8089
   worker-1:
@@ -14,7 +18,7 @@ services:
       - LOCUST_MODE=worker
       - LOCUST_MASTER=master
     ports:
-      - 5557:5557
+      - 5557-5560:5557
     links:
       - master
   worker-2:
