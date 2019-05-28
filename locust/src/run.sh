@@ -4,6 +4,7 @@ LOCUST="/usr/local/bin/locust"
 LOCUS_OPTS="-f /locust/tasks.py --host=$TARGET_HOST"
 LOCUST_MODE=${LOCUST_MODE:-standalone}
 
+/locust/setup_gcsfuse.sh
 
 if [[ "$LOCUST_MODE" = "master" ]]; then
     LOG_FILENAME="/locust/stats/results_$RANDOM"

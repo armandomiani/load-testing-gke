@@ -9,7 +9,8 @@ if [[ "$LOCUST_MODE" = "master" ]]; then
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
     apt update && apt install -y gcsfuse
 
-    rm /locust/stats/*.* && gcsfuse $GCS_LOG_BUCKET /locust/stats
+    rm /locust/stats/*.* 
+    gcsfuse $GCS_LOG_BUCKET /locust/stats
 
     echo "Finished."
 elif [[ "$LOCUST_MODE" = "worker" ]]; then

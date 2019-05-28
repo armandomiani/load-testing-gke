@@ -9,8 +9,7 @@ RUN pip install -r /locust/requirements.txt
 
 RUN ls /locust
 RUN chmod +x /locust/*.sh
-RUN /locust/setup_gcsfuse.sh
 
-EXPOSE 5557 5558 8089
+EXPOSE 5557 5558 8089 8080
 
 ENTRYPOINT ["/locust/run.sh"] 
