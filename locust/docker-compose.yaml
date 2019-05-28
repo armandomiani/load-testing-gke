@@ -1,0 +1,16 @@
+version: 2
+
+services:
+  master:
+    build: .
+    environment:
+      - TARGET_HOST=kenlo.com.br
+      - LOCUST_MODE=master
+  worker-1:
+    build: .
+    environment:
+      - LOCUST_MODE=worker
+  worker-2:
+    build: .
+    environment:
+      - LOCUST_MODE=worker
