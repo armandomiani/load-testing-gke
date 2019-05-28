@@ -10,15 +10,20 @@ services:
       - RUN_TIME=1m
       - LOCUST_MODE=master
       - SLAVES_COUNT=2
+      - GCS_LOG_BUCKET=gmiani-load-test-bucket
+      - MASTER_MODE=CI
     ports:
       - 8089:8089
+    volumes:
+      - ./keys:/keys
+    privileged: true
   worker-1:
     build: .
     environment:
       - LOCUST_MODE=worker
       - LOCUST_MASTER=master
     ports:
-      - 5557-5560:5557
+      - 5557:5557
     links:
       - master
   worker-2:
